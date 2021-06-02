@@ -41,41 +41,58 @@ class _MeasurementscreenState extends State<Measurementscreen> {
         ),
         elevation: 0,
       ),
-      body: Container(
-        height: height,
-        width: width,
-        color: Colors.white,
-        child: FutureBuilder(
-          future: apicalls(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            return snapshot.connectionState == ConnectionState.waiting
-                ? Center(
-                    child: CircularProgressIndicator(),
-                  )
-                : Container(
-                    child: ListView.builder(
-                      itemCount: measurementsdata.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Column(
-                          children: [
-                            ListTile(
-                              title: Text(
-                                measurementsdata.keys.toList()[index],
-                                style: TextStyle(color: Colors.black),
-                              ),
-                              trailing: Text(
-                                measurementsdata.values.toList()[index],
-                                style: TextStyle(color: Colors.black),
-                              ),
-                            ),
-                            Divider(),
-                          ],
-                        );
-                      },
-                    ),
-                  );
-          },
-        ),
+      body: FutureBuilder(
+        future: apicalls(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          return snapshot.connectionState == ConnectionState.waiting
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Container(
+                  height: height,
+                  width: width,
+                  child: Column(
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.all(20),
+                          child: Text(
+                            'Take measurements Again',
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          child: ListView.builder(
+                            itemCount: measurementsdata.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Column(
+                                children: [
+                                  ListTile(
+                                    title: Text(
+                                      measurementsdata.keys.toList()[index],
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                    trailing: Text(
+                                      measurementsdata.values.toList()[index],
+                                      style: TextStyle(color: Colors.black),
+                                    ),
+                                  ),
+                                  Divider(),
+                                ],
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+        },
       ),
     );
   }
