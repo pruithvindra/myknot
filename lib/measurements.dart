@@ -60,7 +60,7 @@ class _MeasurementscreenState extends State<Measurementscreen> {
                         child: Container(
                           padding: EdgeInsets.all(20),
                           child: Text(
-                            'Take measurements Again...',
+                            'Take measurements Again',
                             style: TextStyle(color: Colors.blue),
                           ),
                         ),
